@@ -78,7 +78,8 @@ export default function AddressForm(props){
                <Form.Input
                name="name"
                type="text"
-               label="Nombre y apellidos:"
+               pattern="^[A-Za-z ]+$"
+               label="Nombre y apellidos: (Solo letras)"
                placeholder="Nombre y apellidos"
                onChange={formik.handleChange}
                value={formik.values.name}
@@ -98,7 +99,8 @@ export default function AddressForm(props){
                <Form.Input
                name="city"
                type="text"
-               label="Ciudad:"
+               pattern="^[A-Za-z]+$"
+               label="Ciudad: (Solo letras)"
                placeholder="Ciudad"
                onChange={formik.handleChange}
                value={formik.values.city}
@@ -107,7 +109,8 @@ export default function AddressForm(props){
                <Form.Input
                name="state"
                type="text"
-               label="Pais/Región:"
+               pattern="^[A-Za-z]+$"
+               label="Pais/Región: (Solo letras)"
                placeholder="Estado/Región"
                onChange={formik.handleChange}
                value={formik.values.state}
@@ -118,7 +121,8 @@ export default function AddressForm(props){
                 <Form.Input
                 name="postalCode"
                 type="text"
-                label="Código Postal:"
+                pattern="^[0-9]+$"
+                label="Código Postal: (Solo CP validos)"
                 placeholder="Código Postal"
                 onChange={formik.handleChange}
                 value={formik.values.postalCode}
@@ -127,7 +131,8 @@ export default function AddressForm(props){
                 <Form.Input
                 name="phone"
                 type="text"
-                label="Número Telefonico:"
+                pattern="^[0-9]+$"
+                label="Número Telefonico: (Solo numeros validos)"
                 placeholder="Número Telefonico"
                 onChange={formik.handleChange}
                 value={formik.values.phone}
@@ -136,7 +141,7 @@ export default function AddressForm(props){
             </Form.Group>
 
             <div className="actions">
-                <Button className="submit" type="submit" loading={loading}>
+                <Button className="submit" type="submit" loading={loading} onclick="validar2()">
                     {newAddress ? "Crear Dirección" : "Actualizar Dirección"}
                 </Button>
             </div>
@@ -169,3 +174,13 @@ function validationSchema() {
         phone: Yup.string().required(true),
     };    
 }
+
+function validar2() {
+    return{
+        name: input.checkValidity(),
+        city: input.checkValidity(),
+        state: input.checkValidity(),
+        postalCode: input.checkValidity(),
+        phone: input.checkValidity(),
+    };
+  }

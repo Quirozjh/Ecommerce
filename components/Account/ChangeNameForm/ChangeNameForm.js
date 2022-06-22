@@ -32,21 +32,23 @@ export default function ChangeNameForm(props){
           <Form onSubmit={formik.handleSubmit}>
               <Form.Group widths="equal">
                 <Form.Input
-                 name="name" 
-                 placeholder="Ingrea el nuevo nombre" 
+                 name="name"
+                 pattern="^[A-Za-z]+$" 
+                 placeholder="Inserta nombre (SOLO LETRAS)" 
                  onChange={formik.handleChange} 
                  value = {formik.values.name} 
                  error={formik.errors.name}
                  />
                 <Form.Input 
                 name= "lastname" 
-                placeholder="Ingresa los nuevos apellidos" 
+                pattern="^[A-Za-z]+$"
+                placeholder="Inserta apellido (SOLO LETRAS)" 
                 onChange={formik.handleChange} 
                 value = {formik.values.lastname} 
                 error= {formik.errors.lastname}
                 />
               </Form.Group>
-              <Button className="submit" loading= {loading}>
+              <Button className="submit" loading= {loading} onclick="validar2()">
                   Actualizar
               </Button>
           </Form>
@@ -67,3 +69,10 @@ function validationSchema(){
         lastname: Yup.string().required(true),
     };
 }
+
+function validar2() {
+    return{
+        name: input.checkValidity(),
+        lastname: input.checkValidity(),
+    };
+  }

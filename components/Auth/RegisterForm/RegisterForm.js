@@ -35,16 +35,19 @@ export default function RegisterForm(props){
         <Form className="login-form" onSubmit={formik.handleSubmit}>
             <Form.Input 
             name="name" 
-            type="text" 
-            placeholder="Nombre"
+            type="text"
+            pattern="^[A-Za-z]+$"
+            placeholder="Nombre (solo letras)"
             onChange={formik.handleChange}
             error={formik.errors.name}
+
             />
 
             <Form.Input
             name="lastname" 
             type="text" 
-            placeholder="Apellido" 
+            pattern="^[A-Za-z]+$"
+            placeholder="Apellido (solo letras)" 
             onChange={formik.handleChange}
             error={formik.errors.lastname}
             />
@@ -77,7 +80,7 @@ export default function RegisterForm(props){
             <Button  type="button" basic onClick={showLoginForm}>
                 Iniciar sesión
             </Button>
-            <Button type="submit" className="submit" loading={loading}>
+            <Button type="submit" className="submit" loading={loading} onclick="validar2()">
                Registrar 
             </Button>
         </div>
@@ -105,3 +108,10 @@ function validationSchema(){
         password: Yup.string().required("La Contraseña es un campo obligatorio."),
     };
 }
+
+function validar2() {
+    return{
+        name: input.checkValidity(),
+        lastname: input.checkValidity(),
+    };
+  }
